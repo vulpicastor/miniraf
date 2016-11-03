@@ -3,7 +3,7 @@ import astropy.io.fits as fits
 import numpy as np
 import sys
 
-METHOD_MAP = {"median": lambda x: np.median(x, axis=0),
+METHOD_MAP = {"median": lambda x: np.median(x, axis=0, overwrite_input=True),
               "average": lambda x: np.average(x, axis=0),
               "sum": lambda x: np.sum(x, axis=0)}
 
