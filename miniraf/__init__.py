@@ -1,16 +1,21 @@
 import argparse
-import astropy.io.fits as fits
-import numpy as np
 
 import calc
 import combine
 
-if __name__=="__main__":
+from combine import stack_fits_data
+from calc import load_fits_data
+
+def _argparse():
     argparser = argparse.ArgumentParser()
     subparsers = argparser.add_subparsers(help="sub-command help")
     calc.create_parser(subparsers)
     combine.create_parser(subparsers)
-    args = argparser.parse_args()
-    print(args)
+    return argparser.parse_args()
+
+def main():
+    args = _argparse()
     args.func(args)
 
+if __name__=="__main__":
+    main()
