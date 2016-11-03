@@ -1,4 +1,3 @@
-import argparse
 from astropy.io import fits
 import sys
 
