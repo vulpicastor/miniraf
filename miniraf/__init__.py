@@ -1,11 +1,11 @@
 import argparse
 
-import calc
-import combine
-import map as mmap
+from . import calc
+from . import combine
+from . import map as mmap
 
-from combine import stack_fits_data
-from calc import load_fits_data
+from .combine import stack_fits_data
+from .calc import load_fits_data
 
 def _make_argparser():
     argparser = argparse.ArgumentParser()
