@@ -8,11 +8,14 @@ METHOD_MAP = {"median": lambda x: np.median(x, axis=0, overwrite_input=True),
 
 def stack_fits_data(filenames):
     fits_files = []
+    filesdict = {}
     for f in filenames:
-        fits_files.append(fits.open(f))
-    stack = np.array([f[0].data for f in fits_files])
-    for f in fits_files:
-        f.close()
+        if f not in filesdict:
+            filesdict[f] = fits.open(f)
+        fits_files.append(filesdict[f])
+    stack = np.stack((f[0].data for f in fits_files), axis=0)
+    for _, v in filesdict.items():
+        v.close()
     return stack
 
 def create_parser(subparsers):
