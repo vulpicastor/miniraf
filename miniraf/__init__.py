@@ -3,9 +3,9 @@ import argparse
 from . import calc
 from . import combine
 from . import map as mmap
+from . import stats
 
-from .combine import stack_fits_data
-from .calc import load_fits_data
+from .util import *
 
 def _make_argparser():
     argparser = argparse.ArgumentParser()
@@ -13,6 +13,7 @@ def _make_argparser():
     calc.create_parser(subparsers)
     combine.create_parser(subparsers)
     mmap.create_parser(subparsers)
+    stats.create_parser(subparsers)
     return argparser
 
 def main():

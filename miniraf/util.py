@@ -17,3 +17,9 @@ def load_fits_data(filename):
     with fits.open(filename) as f:
         data = f[0].data
     return data
+
+def median_if_sorted(a):
+    n = len(a)
+    if n % 2 != 0:
+        return a[n//2]
+    return (a[n//2-1] + a[n//2]) / 2
