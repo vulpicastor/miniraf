@@ -1,14 +1,17 @@
 import astropy.io.fits as fits
 import numpy as np
 
-def stack_fits_data(filenames):
+def stack_fits_data(filenames, scalefunc=None):
     fits_files = []
     filesdict = {}
     for f in filenames:
         if f not in filesdict:
             filesdict[f] = fits.open(f)
         fits_files.append(filesdict[f])
-    stack = np.stack((f[0].data for f in fits_files), axis=0)
+    if scalefunc is None:
+        stack = np.stack((f[0].data for f in fits_files), axis=0)
+    else:
+        stack = np.stack((scalefunc(f[0].data) for f in fits_files), axis=0)
     for _, v in filesdict.items():
         v.close()
     return stack
